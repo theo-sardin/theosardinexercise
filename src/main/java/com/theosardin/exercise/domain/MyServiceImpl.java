@@ -7,6 +7,8 @@ import org.springframework.web.client.HttpClientErrorException;
 @Service
 public class MyServiceImpl implements MyService {
 
+    public final static String THE_DEED_IS_DONE="I did the thing !";
+
     @Autowired
     DataProvidingService dataProvidingService;
 
@@ -23,7 +25,7 @@ public class MyServiceImpl implements MyService {
     }
 
     @Override
-    public void doSomethingOn404(){
-        System.out.println("Doing stuff");
+    public String doSomethingOn404(){
+        return THE_DEED_IS_DONE;
     }
 }

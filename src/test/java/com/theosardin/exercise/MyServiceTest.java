@@ -11,6 +11,10 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.io.PrintStream;
+
+import static com.theosardin.exercise.domain.MyServiceImpl.THE_DEED_IS_DONE;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -22,13 +26,17 @@ public class MyServiceTest {
 	@Mock
 	HttpClientErrorException httpClientErrorException;
 
+	@Mock
+	PrintStream out;
+
 	@InjectMocks
 	@Spy
 	MyServiceImpl myService;
 
 
 	@Before
-	public void initMocks() {
+	public void initTests() {
+
 		when(httpClientErrorException.getRawStatusCode()).thenReturn(404);
 		when(dataProvidingService.getData()).thenThrow(httpClientErrorException);
 	}
@@ -37,5 +45,10 @@ public class MyServiceTest {
 	public void doSomethingThatCallsDataProvidingServiceTest(){
 		myService.doSomethingThatCallsDataProvidingService();
 		verify(myService,times(1)).doSomethingOn404();
+	}
+
+	@Test
+	public void doSomethingOn404Test(){
+		assertEquals(myService.doSomethingOn404(),THE_DEED_IS_DONE);
 	}
 }
