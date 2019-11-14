@@ -26,9 +26,6 @@ public class MyServiceTest {
 	@Mock
 	HttpClientErrorException httpClientErrorException;
 
-	@Mock
-	PrintStream out;
-
 	@InjectMocks
 	@Spy
 	MyServiceImpl myService;
